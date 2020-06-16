@@ -1,9 +1,44 @@
-let map = L.map('map').fitWorld();
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+var OpenStreetMap_HOT = L.tileLayer(
+  'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+  {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+  }
+);
+
+var OpenTopoMap = L.tileLayer(
+  'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+  {
+    maxZoom: 17,
+    attribution:
+      'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+  }
+);
+var Standar = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+});
+
+let baseMaps = {
+  'Open Street Map': OpenStreetMap_HOT,
+  'Open Street Topo': OpenTopoMap,
+  'Open Standar' : Standar
+};
+
+
+
+//let map = L.map('map').fitWorld();
+
+let map = L.map('map',{
+  layers: [
+    OpenTopoMap
+  ]
+}).fitWorld();
+
+
+L.control.layers(baseMaps, ).addTo(map); //CONTROL LAYRSMAPAS
 
 function eachLayer(layer) {
   const layerData = layer.toGeoJSON();
@@ -11,7 +46,7 @@ function eachLayer(layer) {
   layer.bindPopup(`<h3>${layerData.properties.Nombre}</h3>`);
 }
 
-let layer = omnivore.csv('/Conveniodependencias/convenioleaflet/data/pruebat-rural.csv', {
+let layer = omnivore.csv('/Cnveniodependencias/convleaflet/data/pruebat-rural.csv', {
   latfield: 'GPS.Latitud',
   lonfield: 'GPS.Longitud',
   delimiter: ';'
