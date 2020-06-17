@@ -2,7 +2,7 @@
 var OpenStreetMap_HOT = L.tileLayer(
   'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
   {
-    maxZoom: 19,
+    maxZoom: 15,
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
   }
@@ -27,8 +27,6 @@ let baseMaps = {
   'Open Standar' : Standar
 };
 
-
-
 //let map = L.map('map').fitWorld();
 
 let map = L.map('map',{
@@ -37,13 +35,13 @@ let map = L.map('map',{
   ]
 }).fitWorld();
 
-
 L.control.layers(baseMaps, ).addTo(map); //CONTROL LAYRSMAPAS
 
-function eachLayer(layer) {
-  const layerData = layer.toGeoJSON();
+function eachLayer(layer) { // CADA CXADA UN MARCADOR
+  const layerData = layer.toGeoJSON(); // cargar datos a formato geojason
+  //console.log(layerData)
   layer.options.title = layerData.properties.Nombre;
-  layer.bindPopup(`<h3>${layerData.properties.Nombre}</h3>`);
+  layer.bindPopup(`<h3>${layerData.properties.Nombre}</h3>`); // PARA CZADA MARCADOR UN POPUP
 }
 
 let layer = omnivore.csv('/Cnveniodependencias/convleaflet/data/pruebat-rural.csv', {
@@ -55,14 +53,14 @@ let layer = omnivore.csv('/Cnveniodependencias/convleaflet/data/pruebat-rural.cs
     map.fitBounds(layer.getBounds());
 
     let markers = L.markerClusterGroup({
-      showCoverageOnHover: false, // -muestra los bordes que alcanza
+      showCoverageOnHover: true, // -muestra los bordes que alcanza
       maxClusterRadius: 50 // pixels
     });
     markers.addLayer(layer);
     map.addLayer(markers);
 
-    layer.eachLayer(eachLayer);
-
+    layer.eachLayer(eachLayer);//PARA CADA CAPA CARGUE UN EACHLAYER
+/* Busqueda nombre*/
     let controlSearch = new L.Control.Search({
       layer: markers,
       zoom: 14,
