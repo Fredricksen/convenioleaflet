@@ -44,10 +44,13 @@ function eachLayer(layer) { // CADA CXADA UN MARCADOR
   layer.bindPopup(`<h3>${layerData.properties.Nombre}</h3>`); // PARA CZADA MARCADOR UN POPUP
 }
 
-let layer = omnivore.csv('/Cnveniodependencias/convleaflet/data/pruebat-rural.csv', {
+///Users/Fredricksen/.bitnami/stackman/machines/xampp/volumes/root/htdocs/Cnveniodependencias/convleaflet/data/CPPCUVALLES.csv
+//                         Cnveniodependencias/convleaflet/data/ConveniosPracticasProfesionalesCUVALLES.csv
+let layer = omnivore.csv('/Cnveniodependencias/convleaflet/data/CPPCUVALLES.csv', {
+//let layer = omnivore.csv('/Cnveniodependencias/convleaflet/data/pruebat-rural.csv', {
   latfield: 'GPS.Latitud',
   lonfield: 'GPS.Longitud',
-  delimiter: ';'
+  delimiter: ','
   })
   .on('ready', function() {
     map.fitBounds(layer.getBounds());
