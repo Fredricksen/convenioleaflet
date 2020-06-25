@@ -33,7 +33,7 @@ let map = L.map('map',{
   ]
 }).fitWorld(); 
 
-L.control.layers(baseMaps, ).addTo(map); //CONTROL LAYRSMAPAS
+L.control.layers(baseMaps, ).addTo(map); //CONTROL LAYeRSMAPAS
 
 function eachLayer(layer) { // CADA CAPA UN MARCADOR
   const layerData = layer.toGeoJSON(); // cargar datos a formato geojason
