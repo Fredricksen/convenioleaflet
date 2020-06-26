@@ -26,7 +26,6 @@ let baseMaps = {
 };
 
 //let map = L.map('map').fitWorld();
-
 let map = L.map('map',{
   layers: [
     OpenTopoMap

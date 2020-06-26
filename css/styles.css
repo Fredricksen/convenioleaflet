@@ -10,13 +10,15 @@ body,
   height: 100%;
   width: 100%;
 }
-
 #encabezado1 {
   color: #6b1718;
+  text-align: center;
   font-weight: normal;
   font-size: 35px;
-  font-family: Arial;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   text-transform: uppercase;
+  background-color: rgb(209, 243, 241);
+  padding: 25px;
 }
 a{
   font-weight: bolder;
