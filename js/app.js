@@ -39,12 +39,17 @@ function eachLayer(layer) { // CADA CAPA UN MARCADOR
   const layerData = layer.toGeoJSON(); // cargar datos a formato geojason
   //console.log(layerData)
   layer.options.title = layerData.properties.Nombre;
-  layer.bindPopup(`<h2>${layerData.properties.Nombre}</h2>`); // PARA CZADA MARCADOR UN POPUP
+  layer.bindPopup(`<h2 class = "name">${layerData.properties.Nombre}</h2> <br/>
+   <h3 class = "address">${layerData.properties.Municipio}</h3>
+   <h3 class = "address">${layerData.properties.Dirección}</h3>
+   <h3 class = "address">${layerData.properties.Colonia}</h3>
+   <h3 class = "address">${layerData.properties.Estado}</h3>
+   <a href='#'> mas... </a>`); // PARA CZADA MARCADOR UN POPUP
 }
 
 ///Users/Fredricksen/.bitnami/stackman/machines/xampp/volumes/root/htdocs/Cnveniodependencias/convleaflet/data/CPPCUVALLES.csv
-let layer = omnivore.csv('/Cnveniodependencias/convleaflet/data/CPPCUVALLES.csv', {
-//let layer = omnivore.csv('/Cnveniodependencias/convleaflet/data/pruebat-rural.csv', {
+let layer = omnivore.csv('/conveniosprivados/dependencias/data/CPPCUVALLES.csv', {
+//let layer = omnivore.csv('/Cnveniodependencias/convenios/privados/data/pruebat-rural.csv', {
   latfield: 'GPS.Latitud',
   lonfield: 'GPS.Longitud',
   delimiter: ','
@@ -63,10 +68,10 @@ let layer = omnivore.csv('/Cnveniodependencias/convleaflet/data/CPPCUVALLES.csv'
 /* Busqueda nombre*/
     let controlSearch = new L.Control.Search({
       layer: markers,
-      zoom: 14,
+      zoom: 15,
       marker: false,
       moveToLocation: function(latlng, title, map) {
-        map.flyTo(latlng, 18);
+        map.flyTo(latlng, 16);
 
         map.once('moveend', function(){
           latlng.layer.openPopup();
